@@ -3,39 +3,48 @@ const { Post, User, Comment } = require('../models');
 const router = require('express').Router();
 
 
-router.get('/', ( req, res)=> {
-    Post.findAll({
-        attributes: [
-            'id',
-            'title',
-            'conent',
-            'create_at'
-        ],
+router.get('/', async (req, res) => {
+    console.log()
+    try {
+  
+      res.render('homepage', {
+        User,
+        logged_in: req.session.logged_in,
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
+router.get('/', async (req, res) => {
+    try {
+      
+      const postData = await Post.findAll({
+        
         include: [{
-            model: Comment,
-            attributes:L ['id', 'comment_text', 'post_id', 'user_id', 'create_at'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        },
-    {
-        model: User, 
-        attributes: ['username']
-    }]
-    })
-    .then(postdata => {
-        const posts = postdata.map(post => post.get({ plain: true}));
-        res.render('homepage', {posts, loggedIn: req.session.loggedIn});
-    }) 
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err)
-    })
-})
+          model: User,
+          attributes: ['userName'],
+  
+          model: Comment, 
+          attributes: ['created_at', 'id', 'comment', 'post_id', 'user_id'],
+        }],
+      });
+      
+      const posts = postData.map((post) => post.get({ plain: true }));
+  
+      
+      res.render('homepage', {
+        posts,
+        logged_in: req.session.logged_in
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
 
 router.get('/login', (req, res) => {
-    if (req.session.loggedIn) {
+    if (req.session.logged_in) {
         res.redirect('/');
         return;
     }
@@ -43,8 +52,14 @@ router.get('/login', (req, res) => {
 })
 
 router.get('/signup', (req, res) => {
+    if (req.session.logged_in) {
+      res.redirect('/');
+      return;
+    }
+  
     res.render('signup');
 });
+
 
 router.get('/post/:id', (req, res) => {
     Post.findOne({
