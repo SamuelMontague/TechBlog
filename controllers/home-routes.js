@@ -106,12 +106,8 @@ router.get('/posts-comments', (req, res) => {
                     model: User, 
                     attributes: ['username']
                 }
-            },
-            {
-                model: User, 
-                attributes: ['username']
             }
-        ]
+        }]   
          
     })
     .then(postdata => {

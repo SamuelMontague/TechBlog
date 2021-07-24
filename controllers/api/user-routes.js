@@ -1,22 +1,14 @@
 const router = require('express').Router();
-const { post } = require('../../../../lessons/14-MVC/01-Activities/28-Stu_Mini-Project/Main/controllers/api');
-const { User } = require('../../models');
-const sequelize = require('../../config/connection')
 
-router.get('/', (req, res) => {
-    post.findAll({
-        attributes: [
-            'id',
-            'title',
-            'content',
-            'created_at'
-        ]
-    })
-})
+const User = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
-    const userData = await User.create(req.body);
+    const userData = await User.create({
+    userName: req.body.userName,
+    password: req.body.password,
+    }); 
+
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -31,7 +23,7 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userData = await User.findOne({ where: { username: req.body.userName} });
 
     if (!userData) {
       res
