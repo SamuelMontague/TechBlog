@@ -1,27 +1,21 @@
-<div class="card">
-    <h3 class="card-header">Create New Post</h3>
-    <form class="card-body new-post-form" id="new-post-form">
-        <label for="post-title" class="form-label">Title</label>
-        <input type="text" id="post-title" name="post-title" class="form-input" />
+<h2>{{title}}</h2>
+<p>{{post_body}}</p>
+<p class="post-footer">posted by {{user.name}} on {{post_date}}</p>
+<form id="new-comment-form">
+  <label for="comment-body">your sass:</label>
+  <input class="form-input" type="textarea" id="comment-body" name="comment-body" />
+  <button type="submit">post comment</button>
+</form>
+{{#if comments.length}}
+{{#each comments as |comment|}}
+    <h2>
+      <a href="/comments/{{comment.id}}">{{user.name}}</a>
+    </h2>
+    <p>
+      {{comment_body}}
+    </p>
+    <p>made on {{comment_date}}</p>
+{{/each}}
+{{/if}}
 
 
-        <label class="form-label" for="content">Content</label>
-        <input id="content" name="content" class="form-input" />
-
-        <button type="submit" class="btn">Create</button>
-    </form>
-</div>
-
-<div class="card">
-    <h3 class="card-header">Edit Post</h3>
-    <form class="card-body edit-post-form">
-        <label for="post-title" class="form-label">Title</label>
-        <input name="post-title" type="text" value="{{post.title}}" class="form-input" />
-        <label class="form-label" for="content">Content</label>
-        <input name="content" type="text" value="{{post.content}}" class="form-input" />
-        <button type="submit" class="btn">Update Post</button>
-        <button type="button" class="delete-post-btn btn">Delete Post</button>
-    </form>
-</div>
-
-<script src="/js/add-post.js"></script>

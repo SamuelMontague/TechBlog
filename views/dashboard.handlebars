@@ -1,0 +1,20 @@
+<h2>Welcome, {{name}}</h2>
+<h4>Make a post: </h4>
+<form id="new-post-form"></form>
+  <label for="post-title">title:</label>
+  <input class="form-input" type="text" id="post-title" name="post-title" />
+  <label for="post-body">do go on:</label>
+  <input class="form-input" type="textarea" id="post-body" name="post-body" />
+  <button type="submit">post</button>
+</form>
+{{#if posts.length}}
+<div id="post-list">
+    <h3>Former Posts:</h3>
+    {{#each posts as |post|}}
+    <h4><a href="/posts/{{post.id}}">{{post.title}}</a></h4>
+    <button data-id="{{post.id}}">delete</button>
+  {{/each}}
+   </div>
+  {{/if}}
+
+ <script src="./js/dashboard.js"></script>

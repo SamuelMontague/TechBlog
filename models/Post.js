@@ -13,7 +13,8 @@ Post.init(
         },
         title: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            defaultValue: DataTypes.NOW
         },
         content: {
             type: DataTypes.TEXT,
@@ -29,6 +30,7 @@ Post.init(
     },
     {
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'post'
