@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <h3 class="edit-heading">edit your post:</h3>
+      <form id="edit-post-form">
+        <div class="form-group">
+          <label for="post-title">title</label>
+          <textarea type="text" class="form-control" rows="1" id="post-title" name="post-title">{{post.title}}</textarea>
+        </div>
+        <div class="form-group">
+          <label for="post-body">post body</label>
+          <textarea type="text" class="form-control" rows="3" id="post-body" name="post-body">{{post.post_body}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-secondary">save</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="../../../js/edit.js"></script>

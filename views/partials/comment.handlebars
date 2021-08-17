@@ -1,5 +1,5 @@
-<form id="new-comment-form">
-  <label for="comment-body">write your comment here:</label>
-  <input class="form-input" type="textarea" id="comment-body" name="comment-body" />
-  <button type="submit">post it</button>
-</form>
+
+<div class="comments card-body">
+  <h6 class="comment card-title">{{this.comment_body}}</h6>
+  <p class="comment card-text">{{this.user.name}} on {{format_date this.comment_date}}</p>
+</div>
