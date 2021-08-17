@@ -1,17 +1,20 @@
-<h3>Login</h3>
-  <form id="login-form" >
-    <label for="username-login">Username</label>
-    <input  id="username-login" type="text" class="form-input" />
+<h2>Login</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      <form id="login-form" class="form-inline">
+        <div class="form-group mb-2 mr-sm-2">
+          <label for="username-login" class="mb-2 mr-sm-2">username:</label>
+          <input type="text" class="form-input form-control" id="username-login" placeholder="username">
+        </div>
+        <div class="form-group mb-2 mr-sm-2">
+          <label for="password-login" class="mb-2 mr-sm-2">password:</label>
+          <input type="password" class="form-input form-control" id="password-login" placeholder="password">
+        </div>
+        <button type="submit" class="btn btn-secondary mb-2">login</button>
+      </form>
+    </div>
+  </div>
+</div>
 
-    <label for="password-login">Password</label>
-    <input id="password-login" type="password" class="form-input" />
-    <button type="submit">Login!</button>
-
-  </form>
-
-  
-  <a class="login-link" href="/signup">Sign up instead</a>
-
-
-
-<script src="/js/login.js"></script>
+<script src="./js/login.js"></script>

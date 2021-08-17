@@ -1,15 +1,17 @@
 
-{{#each posts as |post|}}
-<div class="row mb-4 post">
-  <div class="col-md-5">
-    <h2>
-      <a href="/post/{{post.id}}">{{post.title}}</a>
-    </h2>
-    <p>
-      {{post.post_body}}
-    </p>
-    <p>Authored by: {{post.user_id}} on {{post.post_date}}</p>
+<div id="home-post-list" class="container">
+  <div class="row">
+    <div class="col-10">
+        {{#each posts as |post|}}
+        <div class="home card">
+          <h3 class="home card-header"><a href="/posts/{{post.id}}">{{post.title}}</a></h3>
+          <div class="home card-body">
+            <h5 class="card-title">{{post.post_body}}</h5>
+            <p class="card-text">Posted by {{user.username}} on {{format_date post.post_date}}</p>
+          </div>
+        </div>
+        {{/each}}
+    </div>
   </div>
 </div>
-{{/each}}
 

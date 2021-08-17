@@ -1,0 +1,10 @@
+[{
+    "comment_body": "this is the comment body",
+    "user_id": 2,
+    "post_id": 1
+},
+{
+    "comment_body": "this is the comment body2",
+    "user_id": 1,
+    "post_id": 2
+}]

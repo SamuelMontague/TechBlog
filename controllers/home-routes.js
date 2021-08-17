@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
         const postData = await Post.findAll({
             include: {
                 model: User,
-                attributes: ['name']
+                attributes: ['username']
             }
         });
 
@@ -24,20 +24,21 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {
+    console.log('in dashboard')
     try {
       
-      const userData = await User.findByPk({
+      const userData = await User.findByPk(req.session.user_id,{
         attributes: {exclude: ['password'] },
         include: [{
             model: Post
            
         }],
       });
-      
+      console.log(userData)
       const user = userData.get({ plain: true });
   
-      
-      res.render('homepage', {
+      console.log("this is user", user)
+      res.render('dashboard', {
         ...user,
         logged_in: true
       });
@@ -64,12 +65,12 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     try{
-      const userData = await User.findOne({ where: { email: req.body.email } });
+      const userData = await User.findOne({ where: { username: req.body.username } });
   
       if (!userData) {
         res
           .status(400)
-          .json({ message: 'incorrect email or password, please try again' });
+          .json({ message: 'incorrect username or password, please try again' });
         return;
       }
   
@@ -78,7 +79,7 @@ router.post('/login', async (req, res) => {
       if (!validPassword) {
         res
           .status(400)
-          .json({ message: 'incorrect email or password, please try again' });
+          .json({ message: 'incorrect username or password, please try again' });
         return;
       }
   
@@ -94,7 +95,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/logout', (req, res => {
+router.post('/logout', (req, res) => {
     if(req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).render();
@@ -102,14 +103,14 @@ router.post('/logout', (req, res => {
     } else {
         res.status(404)
     }
-}))
+})
 
 router.get('/posts/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [{
                 model: User,
-                attributes: ['name']
+                attributes: ['username']
             }]
         });
 
@@ -121,12 +122,13 @@ router.get('/posts/:id', async (req, res) => {
             },
             include: [{
                 model: User,
-                attributes: ['name']
+                attributes: ['username']
             }]
         });
 
         const comments = commentData.map((comment) => comment.get({plain: true}))
-
+        console.log("this is post!!" , posts)
+        console.log("this is comments!", comments)
         res.render('post', {
             ...posts,
             comments,
@@ -144,7 +146,7 @@ router.get('/edit/:id', async (req,res) => {
             {
                 include: [{
                     model: User, 
-                    attributes: ['name']
+                    attributes: ['username']
                 }]
             })
 

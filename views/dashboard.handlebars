@@ -1,20 +1,44 @@
-<h2>Welcome, {{name}}</h2>
-<h4>Make a post: </h4>
-<form id="new-post-form"></form>
-  <label for="post-title">title:</label>
-  <input class="form-input" type="text" id="post-title" name="post-title" />
-  <label for="post-body">write content here:</label>
-  <input class="form-input" type="textarea" id="post-body" name="post-body" />
-  <button type="submit">post</button>
-</form>
-{{#if posts.length}}
-<div id="post-list">
-    <h3>Past Posts:</h3>
-    {{#each posts as |post|}}
-    <h4><a href="/posts/{{post.id}}">{{post.title}}</a></h4>
-    <button data-id="{{post.id}}">delete</button>
-  {{/each}}
-   </div>
-  {{/if}}
+<h2 class="welcome text-center">Welcome, {{username}}.</h2>
 
- <script src="./js/dashboard.js"></script>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h3>make a new post:</h3>
+      <form id="new-post-form">
+        <div class="form-group">
+          <label for="post-title">title</label>
+          <input type="text" class="form-control" id="post-title" name="post-title" placeholder="title" />
+        </div>
+        <div class="form-group">
+          <label for="post-body">please elaborate</label>
+          <textarea type="text" class="form-control" rows="3" id="post-body" name="post-body"
+            placeholder="post body"></textarea>
+        </div>
+        <button type="submit" class="btn btn-secondary">post</button>
+      </form>
+    </div>
+  </div>
+</div>
+{{#if posts.length}}
+<div id="post-list" class="container-fluid">
+  <div class="row">
+    <div class="d-flex flex-column col-10">
+      <h4 id="prior">prior posts:</h4>
+        {{#each posts as |post|}}
+        <div class="dash-post card justify-self-center">
+          <h3 class="card-header"><a href="/posts/{{post.id}}">{{post.title}}</a></h3>
+          <div class="card-body">
+            <h5 class="card-title">{{format_date post.post_date}}</h5>
+            <p class="card-text">{{post.post_body}}</p>
+            <button type="button" class="btn btn-secondary btn-sm" id="delete-btn" data-id="{{post.id}}">delete</button>
+            <a href="/edit/{{post.id}}"><button type="button" class="btn btn-secondary btn-sm">edit</button></a>
+          </div>
+        </div>
+        {{/each}}
+    </div>
+  </div>
+</div>
+
+<script src="./js/delete.js"></script>
+{{/if}}
+<script src="./js/post.js"></script>
