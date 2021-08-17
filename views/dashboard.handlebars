@@ -3,13 +3,13 @@
 <form id="new-post-form"></form>
   <label for="post-title">title:</label>
   <input class="form-input" type="text" id="post-title" name="post-title" />
-  <label for="post-body">do go on:</label>
+  <label for="post-body">write content here:</label>
   <input class="form-input" type="textarea" id="post-body" name="post-body" />
   <button type="submit">post</button>
 </form>
 {{#if posts.length}}
 <div id="post-list">
-    <h3>Former Posts:</h3>
+    <h3>Past Posts:</h3>
     {{#each posts as |post|}}
     <h4><a href="/posts/{{post.id}}">{{post.title}}</a></h4>
     <button data-id="{{post.id}}">delete</button>

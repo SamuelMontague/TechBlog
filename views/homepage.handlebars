@@ -1,5 +1,4 @@
 
-
 {{#each posts as |post|}}
 <div class="row mb-4 post">
   <div class="col-md-5">
@@ -9,7 +8,7 @@
     <p>
       {{post.post_body}}
     </p>
-    <p>created by {{post.user_id}} on {{post.post_date}}</p>
+    <p>Authored by: {{post.user_id}} on {{post.post_date}}</p>
   </div>
 </div>
 {{/each}}
