@@ -8,7 +8,7 @@
 
    Deployable: https://aqueous-sea-56644.herokuapp.com/
 
-   ![screenshot](./public/images/techblogscreenshoot.png)
+   ![screenshot](./public/images/techblogscreenshoot.PNG)
    ![screenshot](./public/images/techblogscreenshot2.png)
 
     
