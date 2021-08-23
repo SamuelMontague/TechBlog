@@ -38,5 +38,5 @@ app.use(routes);
 app.use(api);
 
 sequelize.sync({force: false}).then(() => {
-  app.listen(PORT, () => console.log(`${PORT} is GO!`))
+  app.listen(PORT, () => console.log(`${PORT} Vamos!`))
 });
