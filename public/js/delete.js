@@ -1,4 +1,3 @@
-// facilitates the deletion of a post
 const deleteBtnHandler = async (e) => {
     if(e.target.hasAttribute('data-id')){
       const id = e.target.getAttribute('data-id');
@@ -15,4 +14,4 @@ const deleteBtnHandler = async (e) => {
     }
   };
   
-document.querySelector('#post-list').addEventListener('click', deleteBtnHandler);
+  document.querySelector('#post-list').addEventListener('click', deleteBtnHandler);
